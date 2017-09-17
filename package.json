@@ -12,7 +12,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint src; exit 0"
+    "lint": "eslint src; exit 0",
+    "coverage": "npm test -- --coverage"
   },
   "devDependencies": {
     "eslint": "4.6.1",
