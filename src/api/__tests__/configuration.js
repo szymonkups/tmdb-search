@@ -1,14 +1,16 @@
 /* global jest, window */
 
 import { createUrl } from '../config';
-import search from '../search';
+import configuration from '../configuration';
 
 describe( 'search', () => {
 	const resultData = { foo: 'bar' };
-	let isResponseOk = true;
+	let isResponseOk;
 	let fetchMock;
 
 	beforeEach( () => {
+		isResponseOk = true;
+
 		// Mocked fetch method used during tests.
 		// Could use sinon.js but for simple mocks jest is fine.
 		fetchMock = jest.fn().mockImplementation( () => {
@@ -24,9 +26,21 @@ describe( 'search', () => {
 		const originalFetch = window.fetch;
 		window.fetch = fetchMock;
 
-		return search( 'foo bar', 1 ).then( result => {
+		return configuration( false ).then( result => {
 			expect( fetchMock.mock.calls.length ).toEqual( 1 );
-			expect( fetchMock.mock.calls[ 0 ][ 0 ] ).toEqual( createUrl( '/search/movie', { query: 'foo bar', page: 1 } ) );
+			expect( fetchMock.mock.calls[ 0 ][ 0 ] ).toEqual( createUrl( '/configuration' ) );
+			expect( result ).toEqual( resultData );
+
+			window.fetch = originalFetch;
+		} );
+	} );
+
+	it( 'should use cashed responses as default', () => {
+		// Replace window.fetch for a moment to check if it is called properly.
+		const originalFetch = window.fetch;
+		window.fetch = fetchMock;
+
+		return configuration().then( result => {
 			expect( result ).toEqual( resultData );
 
 			window.fetch = originalFetch;
@@ -34,9 +48,9 @@ describe( 'search', () => {
 	} );
 
 	it( 'should use passed function', () => {
-		return search( 'foo bar', 1, fetchMock ).then( result => {
+		return configuration( false, fetchMock ).then( result => {
 			expect( fetchMock.mock.calls.length ).toEqual( 1 );
-			expect( fetchMock.mock.calls[ 0 ][ 0 ] ).toEqual( createUrl( '/search/movie', { query: 'foo bar', page: 1 } ) );
+			expect( fetchMock.mock.calls[ 0 ][ 0 ] ).toEqual( createUrl( '/configuration' ) );
 			expect( result ).toEqual( resultData );
 		} );
 	} );
@@ -45,8 +59,19 @@ describe( 'search', () => {
 		isResponseOk = false;
 		expect.assertions( 1 );
 
-		return search( 'foo bar', 1, fetchMock ).catch( e => {
+		return configuration( false, fetchMock ).catch( e => {
 			expect( e ).toBeInstanceOf( Error );
+		} );
+	} );
+
+	it( 'should return value from cache if requested', () => {
+		return configuration( false, fetchMock ).then( () => {
+			expect( fetchMock.mock.calls.length ).toEqual( 1 );
+
+			return configuration( true, fetchMock ).then( result => {
+				expect( fetchMock.mock.calls.length ).toEqual( 1 );
+				expect( result ).toEqual( resultData );
+			} );
 		} );
 	} );
 } );
