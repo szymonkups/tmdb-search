@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './MovieEntry.css';
 import placeholder from './placeholder.png';
 
+/**
+ * Displays information about found movie.
+ */
 class MovieEntry extends Component {
 	render() {
 		const movie = this.props.model;
@@ -21,6 +24,9 @@ class MovieEntry extends Component {
 	}
 }
 
+/**
+ * Stateless component used inside MovieEntry to display single tag.
+ */
 const Tag = props => (
 	<span className="movie-entry__tag">
 		<i className={ 'fa fa-' + props.icon } aria-hidden="true"></i>
