@@ -3,7 +3,7 @@ import configuration from '../api/configuration';
 import MovieModel from './MovieModel';
 
 /**
- * Class modeling search process. It is a bridge between API call and application view.
+ * Class modeling search process. It is a bridge between API calls and application view.
  */
 export default class SearchModel {
 	/**
@@ -39,10 +39,18 @@ export default class SearchModel {
 		this._page = 0;
 	}
 
+	get page() {
+		return this._page;
+	}
+
+	get totalPages() {
+		return this._totalPages;
+	}
+
 	/**
 	 * Returns array of results with movies descriptions.
 	 *
-	 * @returns {Array.<Movie>}
+	 * @returns {Array.<MovieModel>}
 	 */
 	get results() {
 		return this._results;
@@ -52,14 +60,14 @@ export default class SearchModel {
 	 * Fetches next page of movies. Calls `onModelChanged` method provided to the constructor.
 	 */
 	getNextPage() {
-		this._searchApi( this._query, this._page + 1 )
+		return this._searchApi( this._query, this._page + 1 )
 			.then( data => {
 				return this._configurationApi().then( config => {
 					const currentResults = data.results.map( movie => new MovieModel( movie, config ) );
 
 					this._page = data.page;
 					this._results = this._page === 1 ? currentResults : this._results.concat( currentResults );
-					this._totalPages = data._totalPages;
+					this._totalPages = data.total_pages;
 
 					this._onModelChanged();
 				} );
