@@ -11,8 +11,12 @@ export default class SearchModel {
 	 *
 	 * @param {Function} onModelChanged Callback function, called each time some data inside model is changed.
 	 * @param {Function} onModelError Callback function, called when some error occurs.
+	 * @param {Function} [configurationApi] Method used to query API for information about configuration. Default implementation
+	 * can be replaced for testing purposes.
+	 * @param {Function} [searchApi] Method used to query API for information about configuration. Default implementation
+	 * can be replaced for testing purposes.
 	 */
-	constructor( onModelChanged, onModelError ) {
+	constructor( onModelChanged, onModelError, configurationApi = configuration, searchApi = search ) {
 		this._query = '';
 		this._page = 0;
 		this._totalPages = 0;
@@ -20,6 +24,9 @@ export default class SearchModel {
 
 		this._onModelChanged = onModelChanged;
 		this._onModelError = onModelError;
+
+		this._configurationApi = configurationApi;
+		this._searchApi = searchApi;
 	}
 
 	/**
@@ -45,9 +52,9 @@ export default class SearchModel {
 	 * Fetches next page of movies. Calls `onModelChanged` method provided to the constructor.
 	 */
 	getNextPage() {
-		search( this._query, this._page + 1 )
+		this._searchApi( this._query, this._page + 1 )
 			.then( data => {
-				return configuration().then( config => {
+				return this._configurationApi().then( config => {
 					const currentResults = data.results.map( movie => new MovieModel( movie, config ) );
 
 					this._page = data.page;
