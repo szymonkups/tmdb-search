@@ -3,7 +3,7 @@
  */
 export default class MovieModel {
 	/**
-	 * Class construtor.
+	 * Class constructor.
 	 *
 	 * @param {Object} config Configuration object returned from TMDb
 	 * @param {Object} data Object describing single movie returned from TMDb.
