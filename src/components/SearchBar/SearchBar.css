@@ -1,0 +1,53 @@
+.search {
+	background-color: white;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	position: fixed;
+	width: 100%;
+	z-index: 100;
+	top: 0;
+}
+
+.search__input {
+	height: 50px;
+	border: none;
+	background-color: #eeeeee;
+	outline: none;
+	padding-left: 18px;
+	padding-right: 18px;
+	font-size: 16px;
+	color: #525252;
+}
+
+.search__button {
+	height: 50px;
+	width: 50px;
+	font-size: 24px;
+	border: none;
+	color: white;
+	background-color: #00b2b2;
+	outline: none;
+}
+
+.error-message {
+	text-align: center;
+	color: red;
+	margin-top: 15px;
+}
+
+.search__button:hover {
+	background-color: #00c4c4;
+}
+
+/* Add some tweaks to extra small screens. */
+@media (max-width: 768px) {
+	.search__input, .search__button {
+		margin-right: 3%;
+		margin-left: 3%;
+		width: 94%;
+	}
+
+	.search__button {
+		margin-top: 10px;
+	}
+}
