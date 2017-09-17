@@ -9,14 +9,14 @@ export const config = {
 /**
  * Creates URL to The Movie Database.
  *
- *		// Will return 'https://api.themoviedb.org/3/movies/search?key=(...)&page=1&query=batman';
+ *		// Will return 'https://api.themoviedb.org/3/movies/search?api_key=(...)&page=1&query=batman';
  *		const url = createUrl( '/movies/search', { page: 1, query: 'batman' } );
  *
  * @param {String} path
- * @param {Object} parameters
+ * @param {Object} [parameters={}]
  */
-export function createUrl( path, parameters ) {
-	parameters.key = config.key;
+export function createUrl( path, parameters = {} ) {
+	parameters.api_key = config.key;
 	const paramString = Object.keys( parameters ).map( key => key + '=' + parameters[ key ] ).join( '&' );
 
 	return config.baseUrl + path + '?' + paramString;
