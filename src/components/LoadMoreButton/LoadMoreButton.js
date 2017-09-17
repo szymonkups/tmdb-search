@@ -1,6 +1,9 @@
 import React from 'react';
 import './LoadMoreButton.css';
 
+/**
+ * Displays button used to load more movie entries.
+ */
 const LoadMoreButton = props => {
 	return (
 		<div className="row">

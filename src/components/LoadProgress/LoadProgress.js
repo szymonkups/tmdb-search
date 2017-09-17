@@ -1,5 +1,9 @@
 import React from 'react';
+import './LoadProgress.css';
 
+/**
+ * Displays loading progress indicator.
+ */
 const LoadProgress = () => {
 	return (
 		<div className="row">
