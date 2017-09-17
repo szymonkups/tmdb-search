@@ -1,0 +1,43 @@
+.movie-entry {
+	background-color: white;
+	margin-bottom: 20px;
+	padding: 15px;
+	min-height: 138px;
+	overflow: auto;
+}
+
+.movie-entry:first-child {
+	margin-top: 20px;
+}
+
+.movie-entry__poster {
+	width: 92px;
+	height: 138px;
+	float: left;
+	margin-right: 15px;
+}
+
+.movie-entry__title {
+	font-weight: 300;
+	font-size: 18px;
+}
+
+.movie-entry__overview {
+	color: #2e2e2e;
+	font-size: 12px;
+	line-height: 16px;
+	text-align: justify;
+}
+.movie-entry__tags {
+	margin-bottom: 10px;
+}
+
+.movie-entry__tag {
+	display: inline-block;
+	font-size: 10px;
+	text-transform: uppercase;
+	background-color: #2e2e2e;
+	border-radius: 2px;
+	color: white;
+	padding: 2px 7px;
+}
