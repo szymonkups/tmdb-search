@@ -1,0 +1,10 @@
+.no-results-box {
+	margin-top: 200px;
+	color: #d1d1d1;
+	text-align: center;
+	margin-bottom: 200px;
+}
+
+.no-results-box > h1 {
+	margin-bottom: 0;
+}
