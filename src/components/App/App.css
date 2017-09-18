@@ -1,0 +1,10 @@
+.app {
+	padding-top: 100px;
+}
+
+/* Add some tweaks to extra small screens. */
+@media (max-width: 768px) {
+	.app {
+		padding-top: 160px;
+	}
+}
