@@ -5,11 +5,9 @@ import searchApi from '../../api/search';
 import configurationApi from '../../api/configuration';
 
 describe( 'SearchModel', () => {
-	let page, results, totalPages, totalResults, searchApiMock, configurationApiMock, lastQuery, lastPage, searchModel,
-		changeCallback, errorCallback;
+	let results, totalPages, totalResults, searchApiMock, configurationApiMock, searchModel, changeCallback, errorCallback;
 
 	beforeEach( () => {
-		page = 1;
 		results = [ {
 			title: 'title',
 			id: 999,
@@ -23,9 +21,6 @@ describe( 'SearchModel', () => {
 		totalResults = 20;
 
 		searchApiMock = ( query, page ) => {
-			lastQuery = query;
-			lastPage = page;
-
 			return Promise.resolve( {
 				page, results, total_pages: totalPages, total_results: totalResults
 			} );
