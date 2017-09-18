@@ -37,12 +37,23 @@ export default class SearchModel {
 	set query( value ) {
 		this._query = value;
 		this._page = 0;
+		this._totalPages = 0;
 	}
 
+	/**
+	 * Current page fetched from API.
+	 *
+	 * @returns {Number}
+	 */
 	get page() {
 		return this._page;
 	}
 
+	/**
+	 * Total pages of current search.
+	 *
+	 * @returns {Number}
+	 */
 	get totalPages() {
 		return this._totalPages;
 	}
