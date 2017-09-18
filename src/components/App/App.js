@@ -8,6 +8,10 @@ import './App.css';
 
 import SearchModel from '../../models/SearchModel';
 
+/**
+ * Application main component - container.
+ * Connects with SearchModel and updates application's view accordingly.
+ */
 class App extends Component {
 	constructor( props ) {
 		super( props );
