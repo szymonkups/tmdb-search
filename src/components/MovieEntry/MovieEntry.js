@@ -16,7 +16,7 @@ const MovieEntry = props => {
 			<img className="movie-entry__poster" src={ posterUrl } alt={ movie.title + ' poster' } />
 			<h2 className="movie-entry__title">{ movie.title }</h2>
 			<p className="movie-entry__tags">
-				<Tag icon="star" text={ movie.voteAverage } />&nbsp;
+				<Tag icon="star" text={ movie.voteAverage.toString() } />&nbsp;
 				<Tag icon="calendar" text={ movie.releaseDate } />
 			</p>
 			<p className="movie-entry__overview">{ movie.overview }</p>
