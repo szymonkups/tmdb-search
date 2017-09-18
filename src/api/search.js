@@ -11,7 +11,7 @@ import { createUrl } from './config';
  * @param {Number} page Number of result page to obtain.
  * @param {Function} [fetchMethod=fetch] Method used to fetch data. As a default window.fetch is used, but can be replaced
  * by other function that does the same job and returns Promise.
- * @returns {Promise} Resolved with
+ * @returns {Promise} Resolved with search results.
  */
 export default function( query, page, fetchMethod = fetch ) {
 	const url = createUrl( '/search/movie', { query, page } );
